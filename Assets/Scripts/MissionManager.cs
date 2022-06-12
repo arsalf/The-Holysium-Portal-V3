@@ -5,17 +5,16 @@ using UnityEngine.AI;
 using StarterAssets;
 
 public class MissionManager : MonoBehaviour
-{
-    [SerializeField] private GameObject timelineObject;
+{    
     private ThirdPersonController tpController;
     private ThirdPersonAimController tpAimController;
     private Animator playerAnimator;
-    private NavMeshAgent agentPlayer;    
+    // private NavMeshAgent agentPlayer;    
     public Transform targetMissionIn;
 
     private void Awake() 
     {
-        timelineObject.SetActive(false);
+        
     }
 
     private void Start()
@@ -23,8 +22,8 @@ public class MissionManager : MonoBehaviour
         tpController = GetComponent<ThirdPersonController>();
         tpAimController = GetComponent<ThirdPersonAimController>();
         playerAnimator = GetComponent<Animator>();
-        agentPlayer = GetComponent<NavMeshAgent>();
-        agentPlayer.enabled = false;
+        // agentPlayer = GetComponent<NavMeshAgent>();
+        // agentPlayer.enabled = false;
     }
 
     public void setActiveCutscene(bool state)
@@ -34,6 +33,6 @@ public class MissionManager : MonoBehaviour
         // playerAnimator.enabled = !state;
         // agentPlayer.enabled = !state;
         // agentPlayer.SetDestination(targetMissionIn.position);
-        timelineObject.SetActive(state);
+        
     }
 }
