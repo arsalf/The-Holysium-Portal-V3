@@ -14,6 +14,7 @@ public class ThirdPersonFighterController : MonoBehaviour
 {
     // [SerializeField] private float normalSensitivity = 1f;
     // [SerializeField] private float aimSensitivity = .1f;
+    public GameObject leftArmAttackPoint, rightArmAttackPoint;
 
     private StarterAssetsInputs starterAssetInputs;
     private Animator animator;
@@ -84,7 +85,7 @@ public class ThirdPersonFighterController : MonoBehaviour
         {
             currentComboTimer -=  Time.deltaTime;
 
-            if(currentComboTimer <= 0.0f || (currentComboState == ComboState.PUNCH_3 && currentComboTimer <= 0.2f))
+            if(currentComboTimer <= 0.0f)
             {
                 currentComboState = ComboState.NONE;
                 activeTimerToReset = false;
@@ -93,6 +94,32 @@ public class ThirdPersonFighterController : MonoBehaviour
                 thirdpersonController.SetMoveSpeed(normalMoveSpeed);
                 thirdpersonController.SetSprintSpeed(normalSprintSpeed);
             }
+        }
+    }
+
+    void LeftHandAttackOn()
+    {
+        leftArmAttackPoint.SetActive(true);
+    }
+
+    void LeftHandAttackOff()
+    {
+        if(leftArmAttackPoint.activeInHierarchy)
+        {
+            leftArmAttackPoint.SetActive(false);
+        }
+    }
+    
+    void RightHandAttackOn()
+    {
+        rightArmAttackPoint.SetActive(true);
+    }
+
+    void RightHandAttackOff()
+    {
+        if(rightArmAttackPoint.activeInHierarchy)
+        {
+            rightArmAttackPoint.SetActive(false);
         }
     }
 
