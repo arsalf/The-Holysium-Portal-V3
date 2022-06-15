@@ -1,39 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using StarterAssets;
 
 public class MissionManager : MonoBehaviour
-{
-    [SerializeField] private GameObject timelineObject;
-    private ThirdPersonController tpController;
-    private ThirdPersonAimController tpAimController;
-    private Animator playerAnimator;
-    private NavMeshAgent agentPlayer;    
-    public Transform targetMissionIn;
-
-    private void Awake() 
-    {
-        timelineObject.SetActive(false);
-    }
+{    
+    private LevelLoader levelLoader;
 
     private void Start()
-    {
-        tpController = GetComponent<ThirdPersonController>();
-        tpAimController = GetComponent<ThirdPersonAimController>();
-        playerAnimator = GetComponent<Animator>();
-        agentPlayer = GetComponent<NavMeshAgent>();
-        agentPlayer.enabled = false;
+    {        
+        levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
     }
 
-    public void setActiveCutscene(bool state)
-    {
-        tpController.enabled = !state;
-        tpAimController.enabled = !state;
-        // playerAnimator.enabled = !state;
-        // agentPlayer.enabled = !state;
-        // agentPlayer.SetDestination(targetMissionIn.position);
-        timelineObject.SetActive(state);
-    }
+    void OnTriggerEnter(Collider other)
+	{			
+		Mission _mission = other.GetComponent<Mission>();
+
+		if(_mission != null)
+		{			
+			Debug.Log("hit mission info : "+_mission.missionName);            
+
+            levelLoader.LoadNextScene(_mission.nextSceneName);
+            // SceneManager.LoadScene("Scenes/Maintanance");
+		}
+	}
 }

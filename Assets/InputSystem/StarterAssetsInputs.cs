@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool aim;
         public bool shoot;
+        public bool combat;
 
         [Header("Movement Settings")]
 		public bool analogMovement;
@@ -57,6 +58,11 @@ namespace StarterAssets
         {
             ShootInput(value.isPressed);
         }
+        
+		public void OnCombat(InputValue value) 
+        {
+            CombatInput(value.isPressed);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -89,6 +95,10 @@ namespace StarterAssets
 
         public void ShootInput(bool newShootState) {
             shoot = newShootState;
+        }
+        
+		public void CombatInput(bool newCombatState) {
+            combat = newCombatState;
         }
 
 #if !UNITY_IOS || !UNITY_ANDROID
