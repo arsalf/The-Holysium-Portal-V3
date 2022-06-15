@@ -98,12 +98,12 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
-		private MissionManager _missionManager;
+		// private MissionManager _missionManager;
 		private bool _rotateOnMove = true;
 		private const float _threshold = 0.01f;
 
 		private bool _hasAnimator;
-		private Mission _mission;
+		// private Mission _mission;
 
 		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
@@ -122,7 +122,7 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			_playerInput = GetComponent<PlayerInput>();
-			_missionManager = GetComponent<MissionManager>();
+			// _missionManager = GetComponent<MissionManager>();
 
 			AssignAnimationIDs();
 
@@ -372,15 +372,15 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 		
-		void OnTriggerEnter(Collider other)
-		{			
-			_mission = other.GetComponentInParent<Mission>();
-			if(_mission != null)
-			{
-				_missionManager.setActiveCutscene(true);
-				Debug.Log("hit mission info : "+_mission.missionName);
-			}
-		}
+		// void OnTriggerEnter(Collider other)
+		// {			
+		// 	_mission = other.GetComponentInParent<Mission>();
+		// 	if(_mission != null)
+		// 	{
+		// 		_missionManager.setActiveCutscene(true);
+		// 		Debug.Log("hit mission info : "+_mission.missionName);
+		// 	}
+		// }
 
 		public void SetSensitivity(float newSensitivity) 
         {
