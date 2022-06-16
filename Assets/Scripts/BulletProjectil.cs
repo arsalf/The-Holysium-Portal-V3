@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class BulletProjectil : MonoBehaviour
 {
     private Rigidbody bulletRigidbody;
+    public float damage = 2f;
     [SerializeField] private Transform vfxGreenEffect;
     [SerializeField] private Transform vfxRedEffect;
 
@@ -24,10 +26,15 @@ public class BulletProjectil : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<BulletTarget>() != null)
+        if(other.GetComponent<ThirdPersonController>() != null)
         {
             Instantiate(vfxGreenEffect, transform.position, Quaternion.identity);
-        } else
+            other.GetComponent<ThirdPersonController>().TakeDamage(damage);
+        } else if(other.GetComponent<EnemyAi>() != null)
+        {
+            Instantiate(vfxGreenEffect, transform.position, Quaternion.identity);
+            other.GetComponent<EnemyAi>().TakeDamage(damage);
+        }else
         {
             Instantiate(vfxRedEffect, transform.position, Quaternion.identity);            
         }
