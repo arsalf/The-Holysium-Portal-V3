@@ -7,12 +7,7 @@ using StarterAssets;
 
 public class MissionManager : MonoBehaviour
 {    
-    private LevelLoader levelLoader;
-
-    private void Start()
-    {        
-        levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
-    }
+    public LevelLoader levelLoader;    
 
     void OnTriggerEnter(Collider other)
 	{			

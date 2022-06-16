@@ -4,9 +4,8 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour
 {
-    private NavMeshAgent agent;
-
-    public Transform player;
+    private NavMeshAgent agent;    
+    public Transform LookAtPlayer;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -21,8 +20,7 @@ public class EnemyAi : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
-    public Transform projectilePosition;
-    public Transform TargetEnemyPosition;
+    public Transform projectilePosition;    
 
     //States
     public float sightRange, attackRange;
@@ -72,7 +70,7 @@ public class EnemyAi : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(LookAtPlayer.position);
     }
 
     private void AttackPlayer()
@@ -81,13 +79,13 @@ public class EnemyAi : MonoBehaviour
         agent.SetDestination(transform.position);
 
         //Enemy rotate look at player
-        transform.LookAt(TargetEnemyPosition);
+        transform.LookAt(LookAtPlayer);
 
         if (!alreadyAttacked)
         {
             ///Attack code here      
             GameObject peluru = Instantiate(projectile, projectilePosition.position, Quaternion.identity);
-            peluru.transform.LookAt(TargetEnemyPosition);                
+            peluru.transform.LookAt(LookAtPlayer);                
             // Debug.Log("Enemy attacking");
             ///End of attack code
 
@@ -119,4 +117,5 @@ public class EnemyAi : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+
 }

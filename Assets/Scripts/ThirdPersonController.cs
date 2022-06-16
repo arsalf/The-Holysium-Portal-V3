@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -15,6 +16,8 @@ namespace StarterAssets
 	public class ThirdPersonController : MonoBehaviour
 	{
 		[Header("Player")]
+		[Tooltip("Health player")]
+		public float Health = 100f;
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 2.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
@@ -25,7 +28,7 @@ namespace StarterAssets
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 		[Tooltip("Sensitivity for aim look")]
-		public float Sensitivity = 1f;
+		public float Sensitivity = 1f;		
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -66,7 +69,11 @@ namespace StarterAssets
 		public float CameraAngleOverride = 0.0f;
 		[Tooltip("For locking the camera position on all axis")]
 		public bool LockCameraPosition = false;
-
+		
+		[Header("Canvas Ui Game")]
+		[Tooltip("UI Health")]
+		public TextMeshProUGUI healthText;
+		
 		// cinemachine
 		private float _cinemachineTargetYaw;
 		private float _cinemachineTargetPitch;
@@ -113,7 +120,7 @@ namespace StarterAssets
 			if (_mainCamera == null)
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-			}
+			}			
 		}
 
 		private void Start()
@@ -134,6 +141,7 @@ namespace StarterAssets
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
+			healthText.text = Health.ToString();
 			
 			JumpAndGravity();
 			GroundedCheck();
@@ -371,16 +379,6 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-		
-		// void OnTriggerEnter(Collider other)
-		// {			
-		// 	_mission = other.GetComponentInParent<Mission>();
-		// 	if(_mission != null)
-		// 	{
-		// 		_missionManager.setActiveCutscene(true);
-		// 		Debug.Log("hit mission info : "+_mission.missionName);
-		// 	}
-		// }
 
 		public void SetSensitivity(float newSensitivity) 
         {
@@ -390,8 +388,7 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove) 
         {
             _rotateOnMove = newRotateOnMove;
-        }
-		
+        }		
 
 		public void SetMoveSpeed(float speed)
 		{
@@ -406,6 +403,15 @@ namespace StarterAssets
 		public float GetSpeed()
 		{
 			return _speed;
+		}
+
+		public void TakeDamage(float damage)
+		{
+			Health -= damage;
+
+			if (Health <= 0) {
+				Destroy(gameObject);
+			}
 		}
 
 
