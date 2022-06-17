@@ -73,10 +73,10 @@ namespace StarterAssets
 		[Header("Canvas Ui Game")]
 		[Tooltip("UI Health")]
 		public TextMeshProUGUI healthText;
-		[Tooltip("UI Helath Bar")]
+		[Tooltip("UI Health Bar")]
 		public RectTransform HealthBarTransform;
 		
-		[Tooltip("UI Helath Bar")]
+		[Tooltip("UI time")]
 		public TextMeshProUGUI timeText;
 		
 		// cinemachine
@@ -146,7 +146,7 @@ namespace StarterAssets
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);			
-			timeText.text = System.DateTime.Now.ToString("h:mm:ss WIB");
+			timeText.text = System.DateTime.Now.ToString("HH:mm:ss WIB");
 			
 			JumpAndGravity();
 			GroundedCheck();

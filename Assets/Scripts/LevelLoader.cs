@@ -16,6 +16,12 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevel(string levelName)
     {
         animatorTransition.SetTrigger("Fade");
+        
+        if(levelName == "Gameplay")
+        {
+            Cursor.lockState = CursorLockMode.Locked;      
+            Cursor.visible = false;         
+        }        
 
         yield return new WaitForSeconds(transitionTime);
 
