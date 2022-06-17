@@ -8,6 +8,20 @@ using StarterAssets;
 public class MissionManager : MonoBehaviour
 {    
     public LevelLoader levelLoader;    
+	public string[] instructionsText;	
+
+	/// <summary>
+	/// Update is called every frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void Update()
+	{
+		
+	}
+
+	void checkInstructionDone()
+	{
+
+	}
 
     void OnTriggerEnter(Collider other)
 	{			

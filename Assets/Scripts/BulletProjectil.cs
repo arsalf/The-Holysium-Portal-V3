@@ -7,6 +7,7 @@ public class BulletProjectil : MonoBehaviour
 {
     private Rigidbody bulletRigidbody;
     public float damage = 2f;
+    public float speed = 10f;
     [SerializeField] private Transform vfxGreenEffect;
     [SerializeField] private Transform vfxRedEffect;
 
@@ -16,8 +17,7 @@ public class BulletProjectil : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
-        float speed = 10f;
+    {        
         bulletRigidbody.velocity = transform.forward * speed;
     }
     

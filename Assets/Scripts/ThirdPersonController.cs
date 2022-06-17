@@ -73,6 +73,11 @@ namespace StarterAssets
 		[Header("Canvas Ui Game")]
 		[Tooltip("UI Health")]
 		public TextMeshProUGUI healthText;
+		[Tooltip("UI Helath Bar")]
+		public RectTransform HealthBarTransform;
+		
+		[Tooltip("UI Helath Bar")]
+		public TextMeshProUGUI timeText;
 		
 		// cinemachine
 		private float _cinemachineTargetYaw;
@@ -140,13 +145,14 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			_hasAnimator = TryGetComponent(out _animator);
-			healthText.text = Health.ToString();
+			_hasAnimator = TryGetComponent(out _animator);			
+			timeText.text = System.DateTime.Now.ToString("h:mm:ss WIB");
 			
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
+		
 
 		private void LateUpdate()
 		{
@@ -407,11 +413,19 @@ namespace StarterAssets
 
 		public void TakeDamage(float damage)
 		{
-			Health -= damage;
+			if (Health <= 0) 
+			{				
+				healthText.text = "0";
+				HealthBarTransform.offsetMax = new Vector2(-340f, HealthBarTransform.offsetMax.y);
 
-			if (Health <= 0) {
 				Destroy(gameObject);
+			}else
+			{
+				Health -= damage;
+				healthText.text = Health.ToString();
+				HealthBarTransform.offsetMax = new Vector2(HealthBarTransform.offsetMax.x - 4.5f, HealthBarTransform.offsetMax.y);
 			}
+					
 		}
 
 
