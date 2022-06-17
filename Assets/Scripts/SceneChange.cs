@@ -18,6 +18,8 @@ public class SceneChange : MonoBehaviour
     }
 
     public void Gameplay() {  
+        Cursor.lockState = CursorLockMode.Locked;      
+        Cursor.visible = false; 
         SceneManager.LoadScene("Gameplay");  
     }
 
