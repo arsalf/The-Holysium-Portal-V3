@@ -28,7 +28,10 @@ public class Attacks : MonoBehaviour
             if(isPlayer)
             {                     
                 Instantiate(hitFX, transform.position, Quaternion.identity); 
-                hit[0].gameObject.GetComponent<EnemyAi>().TakeDamage(damage);           
+                
+                EnemyAi enemy = hit[0].gameObject.GetComponent<EnemyAi>();
+                
+                if(enemy != null) enemy.TakeDamage(damage);           
             }
 
             gameObject.SetActive(false);
