@@ -36,12 +36,12 @@ public class SoundManager : MonoBehaviour
     }
 
     public void UpdateButtonIcon(){
-        if(muted == true){
-            muteOn.enabled = true;
-            muteOff.enabled = false;
-        }else{
+        if(muted == false){
             muteOn.enabled = false;
             muteOff.enabled = true;
+        }else{
+            muteOn.enabled = true;
+            muteOff.enabled = false;
         }
     }
 
