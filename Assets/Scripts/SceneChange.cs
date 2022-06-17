@@ -20,4 +20,8 @@ public class SceneChange : MonoBehaviour
     public void Gameplay() {  
         SceneManager.LoadScene("Gameplay");  
     }
+
+    public void MainMenu() {  
+        SceneManager.LoadScene("MainMenu");  
+    }
 }
